@@ -2,21 +2,22 @@ import java.io.*;
 import java.util.regex.*;
 import java.util.ArrayList;
 
-public class LogReaderT1 {
+public class CopyOfLogReaderT1 {
 
 	void runTest(String fileName){
+		
 		ArrayList<String> logRecords=new ArrayList<String>();
 		BufferedReader br;
 		String nextRec;
-		long start,end;
+		long start,end,n;
 		
 		start=System.currentTimeMillis();
-		
+		n=0;
 		try {
 			//br = new BufferedReader(new FileReader(fileName));
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(fileName)), "ISO-8859-1"));
 			while( (nextRec=br.readLine()) != null){
-				logRecords.add(nextRec);
+				n++;
 			}
 			br.close();
 		} catch(IOException ex) {
@@ -25,26 +26,7 @@ public class LogReaderT1 {
 		}
 		
 		end=System.currentTimeMillis();
-		System.out.println(logRecords.size());
-		System.out.println("Elapsed time: "+(end-start)+"ms");
-		
-		int n1=0;
-		int n2=0;
-		
-		start=System.currentTimeMillis();
-		Pattern pat=Pattern.compile("^(.{11})\\s(\\d\\d:\\d\\d:\\d\\d)\\s(\\S+)\\s(\\w+\\.\\w+)\\s(\\w+):\\s+(ACCEPT|REJECT|DROP)\\s+" );
-		for(int i=0; i<10; i++){
-			for(String s: logRecords){
-				Matcher mat=pat.matcher(s);
-				if(mat.find()){
-					n1++;
-				} else {
-					n2++;
-				}
-			}
-		}
-		System.out.println("Known:"+n1+"  unknown:"+n2);
-		end=System.currentTimeMillis();
+		System.out.println(n);
 		System.out.println("Elapsed time: "+(end-start)+"ms");
 		
 	}
@@ -54,8 +36,8 @@ public class LogReaderT1 {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		LogReaderT1 l=new LogReaderT1();
-		l.runTest("/home/haazee/logteszt/kern.log.long");
+		CopyOfLogReaderT1 l=new CopyOfLogReaderT1();
+		l.runTest("kern.log");
 	}
 
 }
