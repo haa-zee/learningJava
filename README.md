@@ -1,0 +1,1 @@
+Csupa félbehagyott szemét.
